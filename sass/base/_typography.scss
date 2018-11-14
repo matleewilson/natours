@@ -28,3 +28,40 @@ body {
         animation: moveInRight 1s ease-out;
     }
 }
+
+.heading-secondary {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    // in order for the background image to not span across the entire width of the container, we use inline-block so it stops at the end of the content, which in this case is end of the text.
+    display: inline-block;
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    // the background gets clipped exactly where the text is. it will clip it to exactly where the text sits so the background gradient will only be visible where the text is.
+    -webkit-background-clip: text;
+    background-clip: text;
+    // make the text transparent so all we see is the background image. without making the text transparent, the text will sit on top of the background image and we won't be able to see the gradient.
+    color: transparent;
+    letter-spacing: 2px;
+    transition: all .2s;
+
+    &:hover {
+        // scale 1.1 = 110%
+        transform: skewY(2deg) skewX(15deg) scale(1.1);
+        // x y blur color
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+    }
+}
+
+.heading-tertiary {
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.paragraph {
+    font-size: $default-font-size;
+    //targeting all paragraphs EXCEPT (NOT) the last one
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+    }
+}

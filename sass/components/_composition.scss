@@ -1,0 +1,47 @@
+.composition {
+    position: relative;
+
+    &__photo {
+        width: 55%;
+        // box shadow that makes it look like the images are hovering above the background
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+        transition: all .2s;
+        outline-offset: 2rem;
+
+        &--p1 {
+            left: 0;
+            top: -2rem;
+        }
+
+        &--p2 {
+            right: 0;
+            top: 2rem;
+        }
+
+        &--p3 {
+            left: 20%;
+            top: 10rem;
+        }
+
+        &:hover {
+            outline: 1.5rem solid $color-primary;
+            // when hovered, scale will make it grow in size
+            // when hovered, translateY will push the image up (because of negative value)
+            transform: scale(1.05) translateY(-.5rem);
+            // more box shadow will make the images appear as if they are hovering even higher from the background
+            box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+            z-index: 20;
+        }
+    }
+
+    // composition:hover composition__photo:not(:hover)
+    // select the hover state of the parent element so it selects all child elements
+    // this selector will select all the photos that are NOT hovered
+    &:hover &__photo:not(:hover) {
+        // this reduces the original size by 5%
+        transform: scale(.95);
+    }
+}
