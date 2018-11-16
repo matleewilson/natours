@@ -10,7 +10,7 @@
     background-image: linear-gradient(to right bottom,
     rgba($color-primary-light, 0.8),
     rgba($color-primary-dark, 0.8)),
-    url(/img/nat-4.jpg);
+    url(../img/nat-4.jpg);
     background-size: cover;
     // negative margin to remove white gap between the two sections, it will move up to cover it
     margin-top: -10rem;
@@ -27,4 +27,9 @@
     background-color: $color-grey-light-1;
     padding: 25rem 0 15rem 0;
     margin-top: -10rem;
+}
+
+.section-stories {
+    padding: 15rem 0;
+    position: relative;
 }

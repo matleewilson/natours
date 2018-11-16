@@ -1,0 +1,21 @@
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    // so it appears behind all the other elements in section-stories
+    z-index: -1;
+    // don't want to see all the colors, it'll make everything stand out more and readable.
+    opacity: .15;
+    // needs this so it fills the parent container completely and not overflow outside into the defined padding
+    overflow: hidden;
+
+    &__content {
+        height: 100%;
+        width: 100%;
+        // similar to background-image: cover; also works for images
+        // this will allow the video to fill the entire parent while still maintaining the aspect ratio of the video. anything that doesn't fit will be clipped off so it makes the aspect ratio
+        object-fit: cover;
+    }
+}

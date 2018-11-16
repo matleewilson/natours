@@ -1,0 +1,90 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    // change opacity on story boxes so you can see some of the background video
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    // since transform:translate takes up some of the defined padding, add the 3rem value to padding-left to compensate 6rem(above) + 3rem(translate value)
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    
+
+    transform: skewX(-12deg);
+
+    // this is what we used before in the feature section but since there cannot be two different transforms on the same element (translate, *below*), the translate will take precedence and this will not work, so we must add this skew property along with the translate property so that it looks normal like what we want, then apply it to the text container box so that is also reverted back to normal and that leaves only the background shape skewed for the polygon shape.
+    // & > * {
+    //     transform: skewX(12deg)
+    // }
+
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        // radius, at, center
+        // 50% 50% is the exact center of the circle
+        //first number is the radius of the circle which will be half the height and width of the element = 7.5rem because above, diameter of the circle is 15rem.
+        // in order for shape-outside to work the element must be floated! it must also have defined dimensions (width AND height)!
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        // to create a matching circle for the shape-outside property we use the same values to create a circle with clip-path
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        // the best way to move a floated element is to NOT use margins or padding, but the transform property
+
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+    }
+
+    // flexible images for responsive design always need a width/height NO EXCEPTIONS
+    &__img {
+        // since the img is inside story__shape that has defined dimensions, 100% will inherhit the values defined above in the parent element ^
+        height: 100%;
+        // translateX moves the lady to the center of the story shape circle, without it she would be more to the right, hence the negative value
+        // scale will zoom in the picture a little bit so we can add less scale in the hover effect so it looks like the img is farther away
+        transform: translateX(-4rem) scale(1.4);
+        // backface visibility will fix a number of strange bugs that happens with animations
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        // when using transforms or animations, this transition property is necessary for the design
+        transition: all .5s;
+    }
+
+    &__text {
+        transform: skewX(12deg);
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        // the original state should be -50 -50 but we move it down so when hovered it hovers back up!!!!!
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        // then center the text inside the figcaption element
+        text-align: center;
+        // initial state before hover animation occurs, so you can't see it.
+        opacity: 0;
+        transition: all .5s;
+        // there's a weird glitch that happens when translating elements that makes it shake when the animation finishes... for some reason this backface visibility fixes it!!!
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption {
+        // when hovered it becomes full opacity
+        opacity: 1;
+        // this is the original position that we will see when hovered, it will move up from the position 20% value!!!!!
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img {
+        transform: translateX(-4rem) scale(1);
+        // brightness at default is 100%, lower will make it darker, heigher will make it brighter.
+        // this blur and brightness will make the text pop and stand out against the background img
+        filter: blur(3px) brightness(80%);
+    }
+}

@@ -17,7 +17,7 @@
 <body>
     <header class="header">
         <div class="header__logo-box">
-            <img src="../img/logo-white.png" alt="Logo" class="header__logo">
+            <img src="img/logo-white.png" alt="Logo" class="header__logo">
         </div>
         <div class="header__text-box">
             <h1 class="heading-primary">
@@ -55,9 +55,9 @@
                 </div>
                 <div class="col-1-of-2">
                     <div class="composition">
-                        <img src="../img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
-                        <img src="../img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
-                        <img src="../img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+                        <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
+                        <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
+                        <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
                     </div>
                 </div>
             </div>
@@ -212,7 +212,68 @@
             <div class="u-center-text u-margin-top-huge">
                 <a href="#" class="btn btn--green">Discover all tours</a>
             </div>
-            
+        </section>
+
+        <section class="section-stories">
+            <div class="bg-video">
+                <!-- instead of declaring the src attribute in the video tag itself, we use a source tag within, and then use the src attribute in that -->
+                <video class="bg-video__content" autoplay muted loop>
+                    <!-- videos are from coverr.cc great resource -->
+                    <!-- these two formats are imperative to make sure they work in all modern browsers -->
+                    <source src="img/video.mp4" type="video/mp4">
+                    <source src="img/video.webm" type="video/webm">
+                        Your browser is not supported!
+                </video>
+            </div>
+            <div class="u-center-text u-margin-bottom-big">
+                <h2 class="heading-secondary">
+                    We make people genuinely happy
+                </h2>
+            </div>
+
+            <div class="row">
+                <div class="story">
+                    <figure class="story__shape">
+                        <img class="story__img" src="img/nat-8.jpg" alt="Person on a tour">
+                        <figcaption class="story__caption">
+                            Mary Smith
+                        </figcaption>
+                    </figure>
+                    <div class="story__text">
+                        <h3 class="heading-tertiary u-margin-bottom-small">
+                            I had the best weekend with my family!
+                        </h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, dolorum totam! Obcaecati
+                            veniam magnam eius voluptatibus quos sed enim inventore. Maiores, ab vero cumque quasi
+                            aliquam corrupti deserunt culpa sit! Maiores, ab vero cumque quasi aliquam corrupti
+                            deserunt culpa sit!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="story">
+                    <figure class="story__shape">
+                        <img class="story__img" src="img/nat-9.jpg" alt="Person on a tour">
+                        <figcaption class="story__caption">
+                            Jack Wilson
+                        </figcaption>
+                    </figure>
+                    <div class="story__text">
+                        <h3 class="heading-tertiary u-margin-bottom-small">
+                            WOW! My life is completely different now!!
+                        </h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, dolorum totam! Obcaecati
+                            veniam magnam eius voluptatibus quos sed enim inventore. Maiores, ab vero cumque quasi
+                            aliquam corrupti deserunt culpa sit! Maiores, ab vero cumque quasi aliquam corrupti
+                            deserunt culpa sit!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="u-center-text u-margin-top-huge">
+                <a href="#" class="btn-text">Read all stories &rarr;</a>
+            </div>
         </section>
     </main>
     <!-- <section class="grid-test">
