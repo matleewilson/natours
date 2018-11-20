@@ -33,3 +33,33 @@
     padding: 15rem 0;
     position: relative;
 }
+
+.section-book {
+    padding: 15rem 0;
+    background-image: linear-gradient(to right bottom,
+    $color-primary-light,
+    $color-primary-dark);
+
+}
+.book {
+    // for the gradient to be on top of the image, we put it first in the declaration
+    // instead of using to right, to bottom, etc. we can use deg 90deg would go from bot left to top right, 105 makes it go left -> right at a slight angle upwards which is what we want.
+    // you can declare where the gradient starts and ends by using %
+    // you want both colors meeting at 50% so there isn't any cross over in the gradient, white ends at exactly 50% and the transparent starts at 50%
+    // this is called a solid color gradient
+    background-image: linear-gradient(105deg, 
+    rgba($color-white, .9) 0%,
+    rgba($color-white, .9) 50%,
+    transparent 50%),
+    url(../img/nat-10.jpg);
+    // cover and 100% is the same thing, you could use these interchangeably for background size
+    background-size: 100%;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    height: 50rem;
+
+    &__form {
+        width: 50%;
+        padding: 6rem;
+    }
+}

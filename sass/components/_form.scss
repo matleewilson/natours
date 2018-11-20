@@ -1,0 +1,134 @@
+.form {
+
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        // input elements do not inherhit font-family, so we must explicitly define inherhit here
+        font-family: inherit;
+        // font-color is also not inherhited, so we must explicitly define inherhit here as well
+        color: inherit;
+        font-size: 1.5rem;
+        // always more padding on the sides for buttons and form elements, if there's not enough they look smaller than they actually are. GOOD PRACTICE
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        // when the colored bottom borders are active this transition smoothes it out so it's not immediate and there's an ever slight delay in the timing. looks a lot better this way
+        transition: all .3s;
+
+
+
+        &:focus {
+            // the blue outline when the form input in focused can be removed like this
+            outline: none;
+            box-shadow: 0 1rem 2rem rbga($color-black, .1);
+            // the 3px border gets added to box model so it pushes down the other form elements, so we must add the same border to the initial state but set it to transparent so it's not seen, but allows for the focus border to appear without pushing the elements.
+            border-bottom: 3px solid $color-primary;
+        }
+
+        // this pseudoclass allows us to style the form inputs in their INVALID state
+        &:focus:invalid {
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        // this (::) pseudoelement allows us to modify the placeholder text in input elements. only works on SAFARI and CHROME (2017) 
+        // : <- pseudoclass :: <- pseudoelement
+        &::-webkit-input-placeholder {
+            color: $color-grey-dark-2;
+        }
+
+
+
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        // this margin left value is matches the 2rem padding we declared above for the form inputs. this way they align evenly.
+        margin-left: 2rem;
+        margin-top: .7rem;
+        // without setting the display to block, we won't be able to use margin top and other styles
+        display: block;
+        transition: all .3s;
+
+    }
+
+    // we are using the adjacent sibling selector because form__label is the adjacent sibling to form__input, it needs to be after the form input in order to be selected by the adjacent sibling selector.
+    &__input:placeholder-shown+&__label {
+        // when the placeholder is shown/visible, we want the label to be hidden so we set opacity to 0 and visibility to hidden. if it was just opacity, the element would still be on the page, but with visibility hidden it's not there at all.
+        // if it was set to just visibility hidden we would not be able to animate it so it needs the opacity 0 value
+        // as soon as the placeholder disappears from user input, these properties are no longer in effect...which is the purpose
+        opacity: 0;
+        visibility: hidden;
+        // this translation value mirrors where the placeholder is so when there is user input it appears as if the placeholder is being pushed down, but really it's just the label translating.
+        transform: translateY(-4rem);
+    }
+
+    &__radio-group {
+        width: 49%;
+        // setting the display of the radio group to inline-block will not create any line breaks, and they will be side-by-side... this is better practice than using floats, which could complicate things
+        display: inline-block;
+    }
+
+    &__radio-input {
+        // this removes the default HTML radio button. F that button we don't need it we make our own around here.
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: $default-font-size;
+        // this cursor property will change the default cursor to the pointer hand cursor when selecting these radio buttons. BOOP
+        cursor: pointer;
+        position: relative;
+        // this left padding will move the text over so the button can start at the beginning of the container
+        padding-left: 4.5rem;
+    }
+
+    &__radio-button {
+        // height/width will be the same so it can be a circle. IT WANTS BE A CIRCLE OKAY???
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        // 50% radius is what actually makes it a circle
+        border-radius: 50%;
+        // since spans are by default an inline element, it must be changed to an inline block level element so we can manipulate the height/width, margins, and so on, without creating any line breaks and push everything away and down
+        display: inline-block;
+        // without absolute positioning the custom radio buttons will not sit on top of the HTML buttons
+        // by doing so the custom radio buttons will start where the text starts because that's the beginning of the container so we add some padding to the label so the text is moved over
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+
+        // this pseudoelement is the inner green dot, we use this instead of creating a new element in the HTML
+        &::after {
+            // when using the ::after (and maybe other?) pseudoelement you MUST define a content property (usually set to nothing, or an empty string), as well as the display property
+            content: "";
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            border-radius: 50%;
+            // usually when setting absolute value we set the parent to relative but since the parent element is already set to absolute we don't need to do that because all that matters is there is a position property defined, it could be any of the values!
+            position: absolute;
+            // these values will (hopefully) center the inner dot to the middle of the outer dot. this doesn't always work...
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: $color-primary;
+            // the inner dot will show by default unless we set the opacity to 0
+            opacity: 0;
+            transition: opacity .2s;
+        }
+
+    }
+
+    // we use this pseudoelement to make the inner dot appear just like the natural HTML radio buttons. we do that by making it full opacity. simple!
+    // in order to select our button we use the adjacent sibling selector, then the child selector with the ::after pseudoelement. we could use the + sibling selector, but ~ works here as well. 
+    &__radio-input:checked~&__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+}

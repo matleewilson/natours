@@ -1,0 +1,169 @@
+.navigation {
+
+    &__checkbox {
+        display: none;
+    }
+
+    &__button {
+        // the background and it's gradient is what expands across the page and it appears to be growing from behind this white button so in order to hide it, we must define a height/width that is greater than the background so it covers it.
+        background-color: $color-white;
+        width: 7rem;
+        height: 7rem;
+        position: fixed;
+        // since the height/width of the button is 1rem greater than the background, and in order for it to be aligned with the background we set the top/right at 6rem here and 6.5 for the background to make up for that 1rem difference so now they can sit on top of each other.
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
+        // this center align is to center the horizontal bars inside the button that we created with the navigation icon class, and it's ::before and ::after pseudoelements
+        text-align: center;
+        cursor: pointer;
+    }
+
+    &__background {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        // fixed position takes the element out of the flow of the page just like an absolute positioned element. it allows us to specify it in relation to a positioned element with top, left, right, bottom properties
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        // z-index only works on elements that have defined positions
+        z-index: 1000;
+        transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+        
+    }
+
+    // this div is what holds the navigation list and covers the entire page. it has a fixed position so even if you scroll it will stay fixed and still cover the entire page so all you see is the menu.
+    &__nav {
+        // we are setting the width and opacity to 0 to hide the nav element, and then use the checkbox:checked hack to reveal it again
+        height: 100vh;
+        width: 0;
+        position: fixed;
+        top: 0;
+        // we set this element to left 0 because since the this animation is growing and shrinking it will move in from the left position to the center, which creates a nice animation effect
+        left: 0;
+        // the button must stay on top of everything so you can open and close the menu, but this page spanning element must be on top the background gradient so we set the z-index in between the values of the background and the button.
+        z-index: 1500;
+
+        opacity: 0;
+        
+        // the cubic-bezier is what creates that bouncing from left to right at the end of the animation for the nav list
+        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    // we center the ul element which is a child of the nav 
+    &__list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        list-style: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__item {
+        margin: 1rem;
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+            // we have to set the display to inline-block so the links do not push to a new line, and we can use properties like padding and transform
+            display: inline-block;
+            font-size: 3rem;
+            font-weight: 300;
+            padding: 1rem 2rem;
+            color: $color-white;
+            text-decoration: none;
+            text-transform: uppercase;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+            // by setting the background size, we can manipulate the starting point of the gradient by pushing it way beyond the visible background to the right, and then using an animation to shift it to the left to fill the box with color.
+            background-size: 220%;
+            transition: all .4s;
+
+            span {
+                display: inline-block;
+                margin-right: 1.5rem;
+            }
+        }
+
+        &:hover,
+        &:active {
+            // since we set the background size to 220%, way beyond the original position of the gradient, we set this background position to the original position (100%) and animate it so the user can see the shift from right to left
+            background-position: 100%;
+            // since the gradient moves and covers the element with a white background, we set the color of the text here to a darker color so we can see it.
+            color: $color-primary;
+            // this translateX pushes the list items to the right as it is hovered for a cool effect
+            transform: translateX(1rem);
+        }
+    }
+
+    // here we are selecting the :checked pseudoclass and using the general sibling selector to select the background, and scale the background outward to fill the entire screen. 
+    &__checkbox:checked ~ &__background {
+        // the gradient will grow to cover the whole page by using this scale animation
+        transform: scale(80);
+    }
+
+    // FUNCTIONALITY
+    &__checkbox:checked ~ &__nav {
+        // here we make the nav appear again by setting the width and opactiy back to full
+        opacity: 1;
+        width: 100%;
+    }
+
+    // ICON
+    &__icon {
+        position: relative;
+        margin-top: 3.5rem;
+        &,
+        &::before,
+        &::after {
+            width: 3rem;
+            height: 2px;
+            background-color: $color-grey-dark-3;
+            display: inline-block;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all .2s;
+        }
+        &::before {
+            top: -.8rem;
+        }
+        &::after {
+            top: .8rem;
+        }
+    }
+
+    // to animate the bars moving away from each other we use this selector since the icon is a child of the button and we simply bump up the absolute positioning values by a little and then use transition for timing. this is a very simple example of animations!
+    &__button:hover &__icon::before {
+        top: -1rem;
+    }
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+
+    // we want the bar to disappear when the checkbox is checked but we cannot do anything to the size because the before and after pseudoelements depend on that size so we simply change it to transparent instead
+    &__checkbox:checked + &__button &__icon {
+        background-color: transparent;
+    }
+    // then we rotate the remaining two bars to form an X
+    // but we have to set the positioning of these two bars to top 0 so they can cross and not just meet in the middle and make >
+    &__checkbox:checked + &__button &__icon::before {
+        top: 0;
+        transform: rotate(45deg)
+    }
+
+    &__checkbox:checked + &__button &__icon::after {
+        top: 0;
+        transform: rotate(-45deg)
+    }
+}

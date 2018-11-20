@@ -1,17 +1,32 @@
 // utility classes allow components to stay independent and reusable across the page. 
-
+// we are adding !important so it overrides other styles and these take precedence
 
 // centers text
-.u-center-text {text-align: center;}
+.u-center-text {
+    text-align: center !important;
+}
 
 // 20px bottom margin
-.u-margin-bottom-small { margin-bottom: 1.5rem};
+.u-margin-bottom-small {
+    margin-bottom: 1.5rem !important;
+}
+
 // 40px bottom margin
-.u-margin-bottom-medium { margin-bottom: 4rem};
+.u-margin-bottom-medium {
+    margin-bottom: 4rem !important;
+}
+
 // 80px bottom margin
-.u-margin-bottom-big {margin-bottom: 8rem;}
+.u-margin-bottom-big {
+    margin-bottom: 8rem !important;
+}
+
 // 80px top margin
-.u-margin-top-big { margin-top: 8rem; }
+.u-margin-top-big {
+    margin-top: 8rem !important;
+}
+
 // 100px top margin
-.u-margin-top-huge { margin-top: 10rem; }
- 
+.u-margin-top-huge {
+    margin-top: 10rem !important;
+}
