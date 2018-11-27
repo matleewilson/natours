@@ -7,7 +7,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/icon-font.css">
+    <!-- <link rel="stylesheet" href="css/icon-font.css"> -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
 
@@ -344,7 +344,13 @@
     </main>
     <footer class="footer">
         <div class="footer__logo-box">
-            <img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo">
+            <!-- we are using the srcset attribute to use two different resolution images, one for smaller screens and one for larger screens. the 1x/2x after the src value is called a density descriptor and now this source set attribute allows the browser to choose the best of these two images according to the screen that is being used -->
+            <picture>
+                <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x" media="(max-width: 37.5em)">
+                <img srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo" class="footer__logo">
+            </picture>
+
+
         </div>
         <div class="row">
             <div class="col-1-of-2">
@@ -360,10 +366,13 @@
             </div>
             <div class="col-1-of-2">
                 <p class="footer__copyright">
-                    Built by <a href="#" class="footer__link">Matt Wilson</a> following the examples and instruction of Jonas Schmedtmann in his <a href="#" class="footer__link">Advanced CSS and Sass</a> course. Copyright &copy; by Jonas Schmedtmann. Credit to the original author and designer, Jonas Schmedtmann.
+                    Built by <a href="#" class="footer__link">Matt Wilson</a> following the examples and instruction of
+                    Jonas Schmedtmann in his <a href="#" class="footer__link">Advanced CSS and Sass</a> course.
+                    Copyright &copy; by Jonas Schmedtmann. Credit to the original author and designer, Jonas
+                    Schmedtmann.
                 </p>
             </div>
-        </div>  
+        </div>
     </footer>
 
     <div class="popup" id="popup">
@@ -375,8 +384,13 @@
             <div class="popup__right">
                 <a href="#section-tours" class="popup__close">&times;</a>
                 <h2 class="heading-secondary u-margin-bottom-small">Start booking now</h2>
-                <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms before booking</h3>
-                <p class="popup__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quae eveniet sequi quidem commodi veniam. Ratione architecto, ut voluptate iusto mollitia quae sapiente dolore, reiciendis animi deserunt harum deleniti voluptatibus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla repellendus doloribus enim laboriosam repellat est illo libero recusandae in, dolores similique explicabo accusantium vitae error esse voluptate soluta ea maiores!</p>
+                <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read these terms before
+                    booking</h3>
+                <p class="popup__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quae eveniet
+                    sequi quidem commodi veniam. Ratione architecto, ut voluptate iusto mollitia quae sapiente dolore,
+                    reiciendis animi deserunt harum deleniti voluptatibus! Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Nulla repellendus doloribus enim laboriosam repellat est illo libero recusandae
+                    in, dolores similique explicabo accusantium vitae error esse voluptate soluta ea maiores!</p>
                 <a href="#" class="btn btn--green">Book now</a>
             </div>
         </div>

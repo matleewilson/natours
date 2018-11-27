@@ -12,3 +12,70 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+
+// MEDIA QUERY MANAGER
+
+/*
+0 - 600px:      phone
+600 - 900px:    tablet portrait
+900 - 1200px:   tablet landscape
+1200 - 1800px:  desktop
+1800px+         big desktop
+
+ORDER: base + typography > general layout + grid > page layout > components 
+*/
+
+
+// the @content content directive allows us to parse a block of code into a mixin
+@mixin respond-phone {
+    @media (max-width: 600px) {
+        @content
+    }
+
+    ;
+}
+
+/*
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desk
+*/
+
+// media queries are unaffected by a root font-size setting, so rems will not work for media queries, we have to use ems or px. ems would be of the default browser setting of 16px. the em values below will be converted back to pixels and will be adopted to the font size that the user set for the browser making it a more accessible solution
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media (max-width: 37.5em) { // 600px
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint == tab-port {
+        @media (max-width: 56.25em) { // 900px
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint == tab-land {
+        @media (max-width: 75em) { // 1200px
+            @content
+        }
+
+        ;
+    }
+
+    @if $breakpoint == big-desk {
+        @media (min-width: 112.5em) { // 1800px
+            @content
+        }
+
+        ;
+    }
+}

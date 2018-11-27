@@ -9,7 +9,6 @@
     // since transform:translate takes up some of the defined padding, add the 3rem value to padding-left to compensate 6rem(above) + 3rem(translate value)
     padding-left: 9rem;
     font-size: $default-font-size;
-    
 
     transform: skewX(-12deg);
 
@@ -17,6 +16,17 @@
     // & > * {
     //     transform: skewX(12deg)
     // }
+
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0);
+
+    }
 
     &__shape {
         width: 15rem;
@@ -35,6 +45,10 @@
 
         transform: translateX(-3rem) skewX(12deg);
         position: relative;
+
+        @include respond(phone) {
+            transform: skewX(0);
+        }
     }
 
     // flexible images for responsive design always need a width/height NO EXCEPTIONS
@@ -53,6 +67,11 @@
 
     &__text {
         transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skewX(0);
+
+        }
     }
 
     &__caption {

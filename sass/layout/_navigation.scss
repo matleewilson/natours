@@ -19,6 +19,15 @@
         // this center align is to center the horizontal bars inside the button that we created with the navigation icon class, and it's ::before and ::after pseudoelements
         text-align: center;
         cursor: pointer;
+
+        @include respond(tab-port) {
+            top: 4rem;
+            right: 4rem;
+        }
+        @include respond(phone) {
+            top: 3rem;
+            right: 3rem;
+        }
     }
 
     &__background {
@@ -34,6 +43,14 @@
         z-index: 1000;
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
         
+        @include respond(tab-port) {
+            top: 4.5rem;
+            right: 4.5rem;
+        }
+        @include respond(phone) {
+            top: 3.5rem;
+            right: 3.5rem;
+        }
     }
 
     // this div is what holds the navigation list and covers the entire page. it has a fixed position so even if you scroll it will stay fixed and still cover the entire page so all you see is the menu.

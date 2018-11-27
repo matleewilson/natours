@@ -14,11 +14,19 @@
 // 40px bottom margin
 .u-margin-bottom-medium {
     margin-bottom: 4rem !important;
+
+    @include respond(tab-port) {
+        margin-bottom: 3rem;
+    }
 }
 
 // 80px bottom margin
 .u-margin-bottom-big {
     margin-bottom: 8rem !important;
+
+    @include respond(tab-port) {
+        margin-bottom: 5rem;
+    }
 }
 
 // 80px top margin

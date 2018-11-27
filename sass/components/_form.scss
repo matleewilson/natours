@@ -21,7 +21,9 @@
         // when the colored bottom borders are active this transition smoothes it out so it's not immediate and there's an ever slight delay in the timing. looks a lot better this way
         transition: all .3s;
 
-
+        @include respond(tab-port) {
+            width: 100%;
+        }
 
         &:focus {
             // the blue outline when the form input in focused can be removed like this
@@ -73,6 +75,12 @@
         width: 49%;
         // setting the display of the radio group to inline-block will not create any line breaks, and they will be side-by-side... this is better practice than using floats, which could complicate things
         display: inline-block;
+
+        @include respond(tab-port) {
+            width: 100%;
+            margin-bottom: 2rem;
+
+        }
     }
 
     &__radio-input {
